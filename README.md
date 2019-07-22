@@ -1,6 +1,6 @@
 # NYU CUSP 2019 Capstone Project
 ## Local Air Quality Management: Disrupting Vehicle Emission Testing Programs (New York University, Marron Institute)
-### Instructor: Kevin Cromar
+### Sponsor: Kevin Cromar
 ### Team Member:
 Project manager: Ewelina Marcinkiewicz (em3845@nyu.edu)  
 Web application lead: Jiawen Liang (jl9760@nyu.edu)  
