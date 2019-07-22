@@ -31,5 +31,15 @@ Salt Lake County oversees a vehicle emissions testing program to ensure complian
   - Used ArcGIS for mapping and spatial analysis
   - Maps can be viewed [here](https://drive.google.com/open?id=1_RUWiXNjXRbj_tAb_H6AaePHDXV_AatY)
 
-5. Application
-6. WebSite
+5. [Application](https://github.com/capstoneproject2019airquality/capstone_code_sharing/tree/master/Web%20Application)
+  - Displayed locations of testing facilities with detailed information on each of them and filter feature based on zip code and price range
+  - Developed with Dash
+  - Deployed Dash apps on Heroku ([Instruction](https://dash.plot.ly/deployment))
+6. [WebSite](https://github.com/capstoneproject2019airquality/capstone-website)
+  - Used [HTML5 UP](https://html5up.net) site template
+  - Website Link: https://capstoneproject2019airquality.github.io/capstone-website/
+
+
+### Report:
+
+### Presentation:
