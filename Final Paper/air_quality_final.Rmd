@@ -1,0 +1,146 @@
+---
+title: 'More Efficient at Lower Cost: Disrupting The Salt Lake County Vehicle Testing
+  Program'
+author:
+- Ewelina Marcinkiewicz
+- Jiawen Liang
+- Jingxi Zhao
+- Ursula Kaczmarek
+- Yunhe Cui
+fontsize: 12pt
+output:
+  pdf_document: default
+  word_document: default
+abstract: |
+  Salt Lake County oversees a vehicle emissions testing program to ensure compliance with federal air quality standards. Motorists annually spend millions of dollars for inspections carried out under this program. However, it is not subject to cost controls and suffers from programmatic inefficiencies wherein a large number of compliant vehicles undergo testing and a small number of high-polluting vehicles forgo timely repair. Using survey-based emissions test pricing data, we assess through empirical and spatial autocorrelation analysis the potential economic impact of instituting both emissions test price caps and subsidies to fund compliance repairs. Our results indicate testing providers have an overall negative view towards regulatory price caps but a majority would voluntarily participate in a subsidized repair program. Our research also suggests imposition of a 30-dollar cap paired with subsidization of an early repair program will lower motorists' average transactional costs while ensuring adequate geographic availability of testing services, achieving both improved cost effectiveness and pollution reduction. If effectuated in policy, demonstrated local programmatic improvements like these often serve as powerful examples of change other localities are quick to emulate.
+---
+\fontsize{12}{5}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, results = "hide")
+library(reticulate)
+use_python("/Applications/anaconda3/bin/python")
+```
+
+## Introduction
+Millions of vehicles in the U.S. are subject to local inspection to ensure emissions comply with federal air quality standards. The Salt Lake County, Utah Board of Health oversees a vehicle Inspection and Maintenance Program ("I/M program") comprised of a large hybrid network of high-volume testing-only centers and lower-volume test and repair centers. For motorists in Salt Lake County, testing entails transactional costs that are subject to neither regulatory ceilings nor naturally competitive market forces, exposing them to avoidably high cost burdens (Moghadam and Livernois 1993). The County's emissions testing program saw 721,764 tests performed in 2017 and 754,864 in 2018, at a total cost to motorists of $45,600,229. 
+
+Despite a statutory mandate to prioritize cost effectiveness,[^1] programmatic inefficiencies feature heavily in these unregulated costs. I/M programs do not effectively identify high polluters as I/M test procedures do not account for innovations in vehicle emissions control technologies, nor do they account for real-world driving conditions that affect pollution levels. Moreover, emissions from vehicles that are not due for inspection but out of compliance persistently contribute to pollution levels. 
+
+While market analysis of industrial emissions control is well represented in the economic literature, a robust analysis of vehicle emissions control test pricing is lacking. The overall effectiveness of vehicle emissions control policies has received considerably more attention than consumer- or provider-borne costs (Lurmann et al. 2015; Mott et al. 2002; West 2004). For vehicles approximately twenty years old and newer, emissions control testing entails transferring power train and control system performance data from vehicles’ onboard diagnostic system (OBDII). Although remote sensing technologies have made on-road emissions measurements possible in limited circumstances, data transfer remains the dominant inspection method (Kuhns et al. 2004; Baltusis 2004). 
+
+As OBDII tests comprise 89.7% of all emissions tests in Salt Lake County, testing providers' marginal costs generally lie in the time and labor incurred in visually inspecting each additional OBDII system, linking up OBDII inspection equipment, and retrieving and reviewing the data. Emissions test providers in Salt Lake County are regulated monopolies, leaving some reason to doubt whether the price approximates the true marginal cost of the service (Harrington et al. 2000). More importantly, reduction in air pollution levels under I/M programs is attributable to repair activity, not testing activity (Harrington et al. 2000). In this respect, a pivotal consideration for our study is the distinction between shops that provide emissions tests only and those that provide tests and repair. Test only facilities rely more heavily on tests for revenue than test-and-repair shops whose revenues are more diversified. Because test-and-repair facilities have the highest potential to decrease the pollution levels, this difference is crucial for setting and effectuating specific policy objectives and improving the cost efficiency of the program.
+
+Assessment of providers’ marginal costs is essential in addressing the implications of a regulatory price cap (Bernstein and Sappington 1999). In the absence of these data, however, we examined testing provider survey responses to assess the viability of several proposed price cap amounts and explored the  potential impact repair subsidies would have on testing-and-repair providers’ pricing strategies. This latter point of inquiry remained a continuous focus throughout our work as repair is the only activity shown to reduce pollution.
+
+In summary, this project supported Salt Lake County regulators in the exploration and development of new cost efficiencies in its vehicle emissions testing program. Through empirical and spatial analysis of service provider-level and vehicle-level data, we sought to identify testing price points that can accomplish a decrease in cost per ton of reduced pollutant emissions while preserving adequate geographic service availability within the County.
+
+
+## Data
+The Salt Lake County Board of Health provided initial testing service provider records, including average per-station testing price data for the first two months of 2019. This initial dataset was limited in that it did not contain point geographies and applicable fees or tax additions to prices, nor did it discern service providers offering test services from those that supplement testing with repair services. To address these limitations, we geocoded station street addresses to generate point geographies and surveyed all providers contained in the dataset to supplement necessary pricing and service type data. 
+
+The resulting dataset provided the population of test providers from which we later drew a stratified simple random sample of 35 providers to conduct the more detailed price cap and repair subsidy survey. This data also supported the public-facing interactive web application that allows county motorists to explore test provider location and price details.
+
+Salt Lake County also provided a text file containing 1.646 million observations on individual emissions tests for years 2017 and 2018, covering vehicle characteristics of model year, type, class, and weight, and test parameters of test station ID, location, type, and test result. The station ID key permitted a join to the original pricing dataset containing geocoded point locations, thus permitting removal of the hard-to-standardize location variables. 
+
+These testing data indicate passenger cars made up 54.2% of the tested vehicle fleet in 2017-18, trucks comprised 45.2%, and motorhomes comprised the remaining 0.6%. As indicated above, providers primarily administer OBDII tests. The two-speed idle test wherein a technician measures exhaust gasses from the tailpipe of a vehicle with an idling engine made up 8.4% percent of all tests for the covered years. A passing test result featured in 91.26% of all observations, 4.04% of all tests resulted in failure, and vehicles' onboard computers did not provide sufficient data in the remaining 4.7% of observations.
+
+We initially approached analysis of these emissions testing data with the intent of developing non-compliant vehicle identification and tracking capabilities for Salt Lake County; we abandoned this approach when the County switched focus to the policy implications of regulatory testing price caps and subsidized repair. However, in the absence of data regarding testing providers’ marginal costs incurred with administering tests, our analysis was limited to that made possible with the data generated from our phone surveys of the testing provider sample.
+
+## Methods
+Emissions testing is compulsory for motorists who wish to register their vehicles in Salt Lake County. True free market forces are not in play, and the County’s exploration of a regulatory price cap on the service thus required our exploration of supply side dynamics. In particular, we sought to identify a testing price that optimally balances motorists’ transactional costs and the incentive to the provider to continue providing services (Harrington and McConnell 1999). We first explored the viability of prospective price points through a phone survey of a sample of testing providers. Our  sampling plan and survey questions focused on three objectives: assessing the viability of a price cap for all emissions tests in Salt Lake County; assessing how many stations would still offer testing at a price of 15 dollars; and assessing the providers’ interests in participating in a program subsidizing needed repairs to comply with emissions. To ensure a geographically representative sample of the types of stations and different categories of repair providers, we employed a stratified random sampling method to identify phone survey targets. We generated 35 complete phone survey responses.
+
+Modeling of emissions test failures entailed a high-level exploratory analysis spanning tests conducted through all of 2017 and 2018 at every station. The dataset contained independent variables detailing vehicle and testing characteristics and one categorical dependent variable with three values: test pass, test fail, and test rejected due to insufficient data from the vehicle’s onboard computer.  From a policy perspective, identification of the frequency and sources of test failures were crucial to understand where to target repair education efforts and meaningfully reduce excess emissions from on-road vehicles. Identification of what constitutes an initial test result proved difficult as use of the standard grouping and sorting algorithms produced different test failure frequencies. Accounting for differences in testing requirements based on car age and inferring a minimum time elapse between yearly tests for older vehicles guided our process and gave us a higher degree of confidence in our findings.  
+
+To identify local patterns of spatial association between stations’ testing frequencies, we conducted Local Moran’s I analysis (Anselin 1995) and geographically weighted regression (GWR) using ArcGIS to explore the relationship between testing frequency and local population characteristics (Fotheringham et al. 2003). Local Moran’s I produced a correlation coefficient that measured the overall spatial autocorrelation of station testing frequency. We employed GWR to identify any statistically significant correlations on the census tract level between station testing frequencies and population characteristics.
+
+As mentioned, Salt Lake County provided limited initial testing service provider information. In order to validate the provided data and obtain more detailed information, we employed a phone survey of testing providers We verified their testing prices, including pre- and post- tax sums, and the nature of their service to determine whether they provided testing only or testing and repair services. With the verified pricing data, we developed an interactive web application to display map-based pricing data using the Python Dash analytical visualization framework. To optimize the end user’s interactive experience, we conducted two rounds of user experience testing. For each round we invited three participants (of ages <30 for first round and 30-60 for the second round) to finish a series of tasks around finding the test centers in ZIP code 84119 with the lowest emissions test prices and noting their addresses. In accordance with their feedback, we redesigned our interface and improved the application by enabling zoom functionality and tooltip interactivity to show additional information.  
+
+## Results
+Discrepancies emerged between the prices contained in the County data and the prices facilities reported during data collection and verification of current pricing and services. Such differences suggest testing prices are dynamic and frequently modified. In addition to confusing motorists obligated to test their vehicles, such price fluidity creates an obstacle for creating effective web-based tools such as the one produced in this project, which would otherwise bring pricing transparency. With prices not easily accessible on providers’ websites, the automation needed for a web-based tool is nearly impossible.
+
+Our phone survey of testing providers revealed a generally  negative attitude towards imposing a price cap, even though caps exist in neighboring counties. More than 62% of respondents claimed not to be willing to offer testing if a price cap were introduced. However, most respondents (60%) indicated a willingness to participate in a subsidized program designed to incentivize early repairs. The proposed price cap of 15 dollars, well below the current average price of 34 dollars in Salt Lake County but identical to the cap existing in neighboring Cache County, may improve the program's cost effectiveness, but introduces the risk of reducing the pool of testing providers and does not introduce other improvements that increase overall programmatic effectiveness. In contrast, imposition of a 30-dollar cap that is still lower than the current average price, while utilizing subsidies for an early repair program, improves both cost effectiveness and pollution reduction.
+
+Isolation of OBD tests on vehicles of model years 23 years and newer revealed a ~93% initial test pass rate, controlling for increased latitude in testing requirements of vehicles under six years of age. The high initial-test pass rate suggests the existing blanket approach requiring nearly all vehicles to undergo emissions testing is not a cost-effective method of pollution reduction. The development of methods to selectively identify that small proportion of vehicles most likely to be emissions violators and participants in a subsidized repair program would be a useful exercise in further research.
+
+Spatial analysis of testing facilities and their corresponding test volumes reflected generally good spatial coverage across the county. This imparts a higher degree of confidence that potential policy changes will not drastically affect the availability of testing services within the county. Use of Local Moran’s I helped us identify regions were some disruption in availability could occur. We identified two statistically significant high emissions test frequency clusters, outliers with low test frequencies surrounded by high frequency values and outliers with high test frequencies surrounded by low frequency clusters.
+
+```{r fig.width=5, fig.height=5,fig.align = "center", echo=FALSE}
+library(png)
+library(grid)
+img <- readPNG("image_1.png")
+ grid.raster(img)
+```
+
+\vspace{0pt}
+\begin{footnotesize}
+\it
+fig 1: Local Moran's I of emissions test frequency indicates two large clusters of high test frequency and several outlying clusters of high-frequency tracts near low-frequency tracts. 
+\end{footnotesize}
+
+When integrated with 2010 census population data, it became apparent the high-frequency/low-frequency outlier clusters lie in census tracts with younger populations, lower per capita incomes, and lower median owner-occupied housing costs. GWR results, however, indicated no strong correlation between testing frequencies and population characteristics. From a policymaking perspective, these results, particularly the presence of two large high testing frequency/high population clusters, suggest adequate geographic availability.
+
+## Conclusions
+To improve the cost efficiency and programmatic effectiveness of Salt Lake County's emissions testing program, we sought to identify emissions testing price points that can decrease costs to motorists per ton of reduced pollutant emissions while preserving adequate geographic service availability within the County. Our survey results suggested the introduction of a price cap of 30 dollars and introduction of a subsidized early repair program would reduce the average testing price within the county while improving the program's pollution-reduction effectiveness. Such improvements come by increasing the frequency of repairs, which is the only activity shown to reduce emissions.    
+
+A high-level exploratory analysis of test data on vehicle-level data demonstrated that OBD tests on vehicles of model years 23 years and newer revealed a ~93% initial test pass rate, controlling for increased latitude in testing requirements of vehicles under six years of age. Although the data would support an analysis of the factors contributing to non-passing emissions test results, the County did not request additional analysis beyond the exploratory stage. The high quality and detail inherent in the testing data make statistical modeling of emissions test results a useful starting point in further research. Such modeling could address the cost ineffectiveness of the blanket testing approach by laying the groundwork to identify and track targeted samples of vehicles for additional testing and possible repair.
+
+Spatial analysis on testing data joined with census data revealed local patterns of spatial association between stations’ testing frequencies and population density, suggesting adequate geographic distribution of testing stations and moderate travel and transaction costs for motorists seeking test services. Going forward, additional spatial analysis on the potential effects across Salt Lake County of a regulatory price cap on testing services is needed to support county officials' current exploration of this policy proposal. Salt Lake County must recertify their I/M program to the Utah Air Quality Board over the next several months, which also suggests a need for timely analysis as recertification is good opportunity for the county to consider programmatic revisions. Should alternative proposals fail to materialize, our conclusions would have a strong possibility of influencing the Salt Lake County Council's ultimate adoption of any program changes.
+
+Our development of an interactive web application featuring price and geographic filter functionality to provide county residents with a useful tool for identifying the most convenient testing facilities adds transparency to the existing pricing scheme. While the application provides motorists with a user-friendly and convenient method for accessing current information on emissions testing, maintenance of the data driving the application is essential to avoid transferring misinformation. Such maintenance, however, is beyond the scope of this project.
+
+
+## References
+Baltusis, Paul. "On board vehicle diagnostics." No. 2004-21-0009. SAE Technical Paper, 2004.
+
+Bin, Okmyung. "A logit analysis of vehicle emissions using inspection and maintenance testing data." *Transportation Research Part D: Transport and
+Environment* 8.3 (2003): 215-227.
+
+Calvert, J. G., J. B. Heywood, R. F. Sawyer, and J. H. Seinfeld. "Achieving acceptable air quality: some reflections on 
+controlling vehicle emissions." *Science* 261, no. 5117 (1993): 37-45.
+
+Harrington, Winston, and Virginia D. McConnell. *Coase and car repair: Who should be responsible for emissions of vehicles in 
+use?* No. 1318-2016-103476. 1999.
+
+Harrington, Winston, Virginia McConnell, and Amy Ando. "Are vehicle emission inspection programs living up to expectations?" 
+*Transportation Research Part D: Transport and Environment* 5.3 (2000): 153-172.
+
+Hubbard, Thomas N. "An empirical examination of moral hazard in the vehicle inspection market." *The RAND Journal of Economics*
+(1998): 406-426.
+
+Kuhns, Hampden D., et al. "Remote sensing of PM, NO, CO and HC emission factors for on-road gasoline and diesel engine vehicles in Las Vegas, NV." 
+*Science of the Total Environment* 322.1-3 (2004): 123-137.
+
+Lurmann, Fred, Ed Avol, and Frank Gilliland. "Emissions reduction policies and recent trends in Southern California’s ambient 
+air quality." *Journal of the Air & Waste Management Association* 65.3 (2015): 324-335.
+
+Moghadam, Arian Khaleghi, and John Livernois. "The abatement cost function for a representative vehicle inspection and 
+maintenance program." *Transportation Research Part D: Transport and Environment* 15.5 (2010): 285-297.
+
+Mott, Joshua A., et al. "National vehicle emissions policies and practices and declining US carbon monoxide–related mortality." *Jama* 288.8 (2002):
+988-995;
+
+National Research Council. "Evaluating Vehicle Emissions Inspection and Maintenance Programs." *National Academies Press*, 2001.
+
+Pierce, Lamar, and Jason A. Snyder. "Discretion and manipulation by experts:Evidence from a vehicle emissions policy change." *The BE Journal of 
+Economic Analysis & Policy* 12.3 (2012).
+
+West, Sarah E. "Distributional effects of alternative vehicle pollution control policies." *Journal of Public Economics* 88.3-4 (2004): 735-757
+
+[^1]: Utah Code Annotated § 41-6a-1642(3)(c)(ii).
+
+
+\pagebreak
+## Statement of Work
+All team members engaged in problem statement identification, data collection to verify testing price data, and progress report generation.
+
+Ewelina Marcinkiewicz was responsible for setting measurable targets, intellectual progression of the project, and team management. She conducted multiple problem-solving sessions for the team to identify appropriate goals and methods for various aspects of the project. She handled internal and external communication, managed expectations, and overlooked team’s delivery. Ewelina took responsibility for design and execution of user experience testing for the web application, survey and analysis with testing facility managers, and delivery of key take-aways.
+
+Jiawen Liang was responsible for the web application development. He was responsible for designing a web application based on collected data which could help residents in Salt Lake County to locate the cheapest repair shop around them that can do the emission test. Jiawen created two prototypes of the application based on user experience test results.
+
+Jingxi Zhao was responsible for primary research data acquiring and processing. She led the team in verification of price-related data for 435 test stations and also supported the second round of survey for facility managers. She also deployed the web-based application on Heroku and assisted in building the project website using Javascript, HTML and CSS. 
+
+Ursula Kaczmarek assumed responsibility for making the vehicle-level testing data suitable for exploratory analysis and modeling, using the Tidyverse data-cleaning package in R. She also performed exploratory analysis on these testing data, including identification of  an appropriate algorithm for identifying per-vehicle initial test results. She performed a literature review on developments within the country’s vehicle emissions programs and price caps within regulated monopolies.
+
+Yunhe Cui was responsible for data visualisation and interpretation. She relied on ArcGIS desktop, HTML5, CSS, Tableau Public, CartoDB, and ArcGIS Pro in her work representing spatial and non-spatial data in maps and interactive charts. She also geocoded test station addresses. 
+ 
