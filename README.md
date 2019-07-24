@@ -13,7 +13,7 @@ Salt Lake County oversees a vehicle emissions testing program to ensure complian
 
 ### Code:
 1. [Data Glance](https://github.com/capstoneproject2019airquality/capstone_code_sharing/blob/master/Data%20Glance/data_glance_update_yc3420.ipynb)
-  - PLEASE NOTE: the team did not receive permission to publicly share county-provided data.
+  - PLEASE NOTE: the team did not receive permission to publicly share county-provided data
   - Filter rejects
   - Retest analysis
   - Get stats: pass/fail/reject percentage by station  
@@ -30,7 +30,7 @@ Salt Lake County oversees a vehicle emissions testing program to ensure complian
   - High-level analysis on initial emision test pass/fail rates using Python's Pandas package
 
 4. [Final Paper](https://github.com/capstoneproject2019airquality/capstone_code_sharing/blob/master/Final%20Paper/air_quality_final.pdf)
-  - Rendering of content in R Markdown and LaTeX.
+  - Rendering of content in R Markdown and LaTeX
 
 5. [Mapping Data Preparation](https://github.com/capstoneproject2019airquality/capstone_code_sharing/blob/master/Mapping%20Data%20Preparation/Mapping_yc3420.ipynb)
   - Cleaned and merged datasets for mapping
