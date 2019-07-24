@@ -35,9 +35,9 @@ Salt Lake County oversees a vehicle emissions testing program to ensure complian
 
 5. [Application](https://github.com/capstoneproject2019airquality/capstone_code_sharing/blob/master/Web%20Application/app_0719_Gavin.py)
   - Displayed locations of testing facilities with detailed information on each of them and filter feature based on zip code and price range
-  - Developed with Dash
-  - Deployed Dash apps on Heroku ([Instruction](https://dash.plot.ly/deployment))
-6. [WebSite](https://github.com/capstoneproject2019airquality/capstone-website)
+  - Developed with [Dash](https://pypi.org/project/dash/)
+  - [Deployed](https://jz3309capstone.herokuapp.com/) Dash app on Heroku ([Instruction](https://dash.plot.ly/deployment))
+6. [Website](https://github.com/capstoneproject2019airquality/capstone-website)
   - Used [HTML5 UP](https://html5up.net) site template
   - Website Link: https://capstoneproject2019airquality.github.io/capstone-website/
 
