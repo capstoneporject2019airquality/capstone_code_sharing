@@ -1,7 +1,7 @@
 # NYU CUSP 2019 Capstone Project
 ## Local Air Quality Management: Disrupting Vehicle Emission Testing Programs (New York University, Marron Institute)
 ### Sponsor: Dr. Kevin Cromar
-### Team Member:
+### Team Members:
 Project manager: Ewelina Marcinkiewicz (em3845@nyu.edu)  
 Web application lead: Jiawen Liang (jl9760@nyu.edu)  
 Data processing lead: Jingxi Zhao (jz3309@nyu.edu)  
@@ -13,6 +13,7 @@ Salt Lake County oversees a vehicle emissions testing program to ensure complian
 
 ### Code:
 1. [Data Glance](https://github.com/capstoneproject2019airquality/capstone_code_sharing/blob/master/Data%20Glance/data_glance_update_yc3420.ipynb)
+  - PLEASE NOTE: the team did not receive permission to publicly share county-provided data.
   - Filter rejects
   - Retest analysis
   - Get stats: pass/fail/reject percentage by station  
