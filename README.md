@@ -27,17 +27,20 @@ Salt Lake County oversees a vehicle emissions testing program to ensure complian
 3. [Emission Test Data analysis](https://github.com/capstoneproject2019airquality/capstone_code_sharing/blob/master/Emission%20Test%20Data%20Analysis/pass_fail_analysis_v3.ipynb)
   - Cleaning and munging .txt of vehicle-level test data using R's Tidyverse package to prepare for modeling
   - High-level analysis on initial emision test pass/fail rates using Python's Pandas package
-  
-4. [Mapping Data Preparation](https://github.com/capstoneproject2019airquality/capstone_code_sharing/blob/master/Mapping%20Data%20Preparation/Mapping_yc3420.ipynb)
+
+4. [Final Paper](https://github.com/capstoneproject2019airquality/capstone_code_sharing/blob/master/Final%20Paper/air_quality_final.pdf)
+  - Rendering of content in R Markdown and LaTeX.
+
+5. [Mapping Data Preparation](https://github.com/capstoneproject2019airquality/capstone_code_sharing/blob/master/Mapping%20Data%20Preparation/Mapping_yc3420.ipynb)
   - Cleaned and merged datasets for mapping
   - Used ArcGIS for mapping and spatial analysis
   - Maps can be viewed [here](https://drive.google.com/open?id=1_RUWiXNjXRbj_tAb_H6AaePHDXV_AatY)
 
-5. [Application](https://github.com/capstoneproject2019airquality/capstone_code_sharing/blob/master/Web%20Application/app_0719_Gavin.py)
+6. [Application](https://github.com/capstoneproject2019airquality/capstone_code_sharing/blob/master/Web%20Application/app_0719_Gavin.py)
   - Displayed locations of testing facilities with detailed information on each of them and filter feature based on zip code and price range
   - Developed with [Dash](https://pypi.org/project/dash/)
   - [Deployed](https://jz3309capstone.herokuapp.com/) Dash app on Heroku ([Instruction](https://dash.plot.ly/deployment))
-6. [Website](https://github.com/capstoneproject2019airquality/capstone-website)
+7. [Website](https://github.com/capstoneproject2019airquality/capstone-website)
   - Used [HTML5 UP](https://html5up.net) site template
   - Website Link: https://capstoneproject2019airquality.github.io/capstone-website/
 
