@@ -46,6 +46,4 @@ Salt Lake County oversees a vehicle emissions testing program to ensure complian
   - Website Link: https://capstoneproject2019airquality.github.io/capstone-website/
 
 
-### Report:
-
-### Presentation:
+### [Presentation](https://docs.google.com/presentation/d/1pZGm5TyhvfBVFyYlPeTtQkFEGlsaPTrwDwA7ffx5mLY/edit?usp=sharing)
